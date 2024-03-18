@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+<title>LiveChat Transcript</title>
+</head>
+
+<body style="background-color:#ffffff;font-family: Arial,Helvetica, sans-serif;">
+	<div style="font-size:10px;color:#ffffff;">Chat transcript for your chat with SBICard</div>
+	<div style="background-color:#ffffff;">
+		<div class="main" style="width:100%;border:0px solid #000;">
+			<table class="body-wrap" border="0" cellpadding="0" cellspacing="10px" width="650px">
+				<tr>
+					<td align="left"
+						style="font-size:10px;padding:10px 25px;padding-right:25px;padding-left:25px;word-break:break-word;">
+						<div
+							style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;text-align:center;color:#3c4043;">
+							<img src="https://www.sbicard.com/sbi-card-en/resources/img/m-logo.png" alt="SBI Card Logo" style="width: 120px;height:40px" />
+						</div>
+					</td>
+				</tr>
+				<tr th:each="msg:${msgList}">
+					<td align="left"
+						style="font-size:10px;padding:10px 25px;padding-right:25px;padding-bottom:25px;padding-left:25px;word-break:break-word;">
+						<div th:if="${msg.type} == '1'"
+							style="text-align: left;background-color: #cbe0f4; padding: 10px; border-radius: 5px; margin-bottom: 10px; float: left; clear: both; width: 400px;min-width:300px;font-size: 15px; ">
+
+							<p style="font-weight: bold; font-size: 15px; color: #333; margin: 0;"><span
+									th:text="${msg.name}"></span></p>
+
+							<p style="margin: 5px 0;font-size: 13px; "><span th:utext="${msg.messageText}"></span></p>
+
+							<p style="color: #888; font-size: 12px; margin: 0;"><span
+									th:text="${msg.receivedTime}"></span></p>
+						</div>
+						<div th:unless="${msg.type} == '1'"
+							style="text-align: right;background-color: #eaf7fd; padding: 10px; border-radius: 5px; margin-bottom: 10px; float: right; clear: both; width: 400px;min-width:300px;font-size: 15px; ">
+
+							<p style="font-weight: bold; color: #333; margin: 0;font-size: 15px; "><span
+									th:text="${msg.name}"></span></p>
+
+							<p style="margin: 5px 0;font-size: 13px; text-align : left "><span
+									th:utext="${msg.messageText}"></span></p>
+
+							<p style="color: #888; font-size: 12px; margin: 0;"><span
+									th:text="${#dates.format(msg.receivedTime, 'dd-MM-yyyy HH:mm')}"></span></p>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
